@@ -21,7 +21,7 @@ namespace ExchangeRate.IntegrationTest.Controllers
 
         //TODO Add to configuration
         public string ApiUrl => "https://localhost:44358/api/ExchangeRate/";
-        //public string ApiUrl => "https://exchangerateapi-pk.azurewebsites.net/";
+        //public string ApiUrl => "https://exchangerateapi-pk.azurewebsites.net/api/ExchangeRate/";
         public ExchangeRateControllerTests(WebApplicationFactory<Startup> factory)
         {
             Client = factory.CreateClient(new WebApplicationFactoryClientOptions());
@@ -32,7 +32,7 @@ namespace ExchangeRate.IntegrationTest.Controllers
         {
             try
             {
-                var request = RequestBuilder.BuildRequestForNumberOfDays(10);
+                var request = RequestBuilder.BuildRequestForNumberOfDays(3);
 
                 var httpRequest = new HttpRequestMessage(HttpMethod.Post, ApiUrl)
                 {

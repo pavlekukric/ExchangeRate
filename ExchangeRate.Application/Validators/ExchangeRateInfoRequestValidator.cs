@@ -26,8 +26,12 @@ namespace ExchangeRate.Application.Validators
                 .WithMessage("You must enter at least one date.");
 
             RuleForEach(p => p.Dates)
-                .LessThan(DateTime.Now)
+                .LessThanOrEqualTo(DateTime.Now)
                 .WithMessage($"Dates cannot be in the future.");
+
+            RuleForEach(p => p.Dates)
+                .GreaterThan(new DateTime(1999,1,1))
+                .WithMessage($"Historical rates are available for most currencies back to the year of 1999. You cannot pass date older then this.");
         }
     }
 }
