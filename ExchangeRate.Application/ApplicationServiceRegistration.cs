@@ -1,8 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using ExchangeRate.Application.Ports;
 using ExchangeRate.Application.Services;
 
 namespace ExchangeRate.Application

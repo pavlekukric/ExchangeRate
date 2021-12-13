@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using FluentValidation.Results;
 
 namespace ExchangeRate.Application.Exceptions

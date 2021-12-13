@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ExchangeRate.Application.Ports;
+﻿using ExchangeRate.Application.Ports;
 using ExchangeRate.Infrastructure.Adapters;
 using ExchangeRate.Infrastructure.ExchangeRateHostClient;
 using Microsoft.Extensions.Configuration;

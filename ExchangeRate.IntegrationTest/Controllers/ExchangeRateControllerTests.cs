@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using ExchangeRate.API;
-using ExchangeRate.API.Response;
-using ExchangeRate.Application.Requests;
-using ExchangeRate.IntegrationTest.Base;
 using ExchangeRate.IntegrationTest.Helpers;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Newtonsoft.Json;
@@ -32,7 +27,7 @@ namespace ExchangeRate.IntegrationTest.Controllers
         {
             try
             {
-                var request = RequestBuilder.BuildRequestForNumberOfDays(3);
+                var request = RequestBuilder.BuildRequestForNumberOfDays(50);
 
                 var httpRequest = new HttpRequestMessage(HttpMethod.Post, ApiUrl)
                 {

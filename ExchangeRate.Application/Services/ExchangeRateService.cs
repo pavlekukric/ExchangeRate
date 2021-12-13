@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using ExchangeRate.Application.Exceptions;
 using ExchangeRate.Application.Ports;
@@ -22,6 +21,8 @@ namespace ExchangeRate.Application.Services
 
         //TODO Since historical currency is immutable it make sense to add caching 
         //TODO Also, add all currencies into internal system in order to pre-validate BaseCurrency and TargetCurrency before hitting the API
+        //TODO add logging
+        //TODO Encapsulate validation and logging into separate "decorated" services
         public async Task<ExchangeRateInfo>  GetExchangeRateInfo(ExchangeRateInfoRequest request)
         {
             var validator = new ExchangeRateInfoRequestValidator();
@@ -33,14 +34,10 @@ namespace ExchangeRate.Application.Services
 
             var exchangeRatePerDays = new List<ExchangeRatePerDay>();
 
-            var allTasks = new List<Task>();
-            foreach (var date in request.Dates)
-            {
-                allTasks.Add(GetExchangeRatePerDay(request.BaseCurrency, request.TargetCurrency, date,exchangeRatePerDays));
-            }
+            // TODO Additional investigation about throttling needed. Based on this limit we should execute calls in batch. 
+            //Real time rate limit usage statistics are described in headers that are included with most API responses once enough calls have been made to an endpoint
 
-            //List<ExchangeRatePerDay> exchangeRatePerDays = GetExchangeRatesFrom(allTasks);
-            Task.WaitAll(allTasks.ToArray());
+            Task.WaitAll(request.Dates.Select(date => GetExchangeRatePerDay(request.BaseCurrency, request.TargetCurrency, date, exchangeRatePerDays)).ToArray());
 
             var maxExchangeRatePerDay = GetMaxExchangeRateFrom(exchangeRatePerDays);
             var minExchangeRatePerDay = GetMinExchangeRateFrom(exchangeRatePerDays);

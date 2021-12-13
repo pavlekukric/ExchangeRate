@@ -1,9 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
+﻿using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using ExchangeRate.API.Response;
 using ExchangeRate.Application.Requests;
