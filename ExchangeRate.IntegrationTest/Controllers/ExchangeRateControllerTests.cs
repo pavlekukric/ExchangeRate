@@ -16,7 +16,6 @@ namespace ExchangeRate.IntegrationTest.Controllers
 
         //TODO Add to configuration
         public string ApiUrl => "https://localhost:44358/api/ExchangeRate/";
-        //public string ApiUrl => "https://exchangerateapi-pk.azurewebsites.net/api/ExchangeRate/";
         public ExchangeRateControllerTests(WebApplicationFactory<Startup> factory)
         {
             Client = factory.CreateClient(new WebApplicationFactoryClientOptions());
@@ -25,26 +24,17 @@ namespace ExchangeRate.IntegrationTest.Controllers
         [Fact]
         public async Task Returns_Data_With_Valid_Request()
         {
-            try
+            var request = RequestBuilder.BuildRequestForNumberOfDays(50);
+
+            var httpRequest = new HttpRequestMessage(HttpMethod.Post, ApiUrl)
             {
-                var request = RequestBuilder.BuildRequestForNumberOfDays(50);
+                Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json"),
+            };
 
-                var httpRequest = new HttpRequestMessage(HttpMethod.Post, ApiUrl)
-                {
-                    Content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json"),
-                };
+            var httpResponse = await Client.SendAsync(httpRequest);
+            var exchangeRateResult = await httpResponse.Content.ReadAsStringAsync();
 
-                var httpResponse = await Client.SendAsync(httpRequest);
-                var exchangeRateResult = await httpResponse.Content.ReadAsStringAsync();
-
-                Assert.NotEmpty(exchangeRateResult);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            
+            Assert.NotEmpty(exchangeRateResult);
         }
 
         [Fact]

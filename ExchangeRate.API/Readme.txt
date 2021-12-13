@@ -17,7 +17,7 @@ Method 2 (postman):
 
 Method 3 (Azure API endpoint):
 1. From Postman - New HTTP Request . 
-2. Enter https://exchangerateapi-pk.azurewebsites.net as an address
+2. Enter https://exchangerateapi-pk.azurewebsites.net/api/ExchangeRate/ as an address
 3. Select POST method
 4. Body -> Row -> JSON enter request body palyload. Example:
 
@@ -43,4 +43,6 @@ Investigation about throttling needed. Based on this limit we should execute cal
 
 All https://exchangerate.host/ API endpoints references should be places inside configuration file 
 
+
+Other...
 
