@@ -2,6 +2,8 @@
 
    Clone it from https://github.com/pavlekukric/ExchangeRate
 
+NOTE: Date format should be: yyyy-MM-dd
+
 Method 1 (Integration test):
 1. In ExchangeRateControllerTest, just run Returns_Data_With_Valid_Request test and inspect response
    
@@ -25,6 +27,8 @@ Method 3 (Azure API endpoint):
 
 
 TODO:
+Validate currency
+
 Unit tests
 
 Additional Integration tests
